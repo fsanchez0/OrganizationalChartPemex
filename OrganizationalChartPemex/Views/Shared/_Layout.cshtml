@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OrganizationalChartPemex</title>
+    <title>@ViewData["Title"] - Organigrama PEMEX</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/pemexStyle.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OrganizationalChartPemex</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Organigrama PEMEX</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - OrganizationalChartPemex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+            &copy; 2021 - PEMEX - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -74,19 +74,18 @@
 
                     $.each(empData, function (index, row) {
                         var jefe = row.jefe.toString() == "0" ? '' : row.jefe.toString();
-                        console.log("Nivel: " + row.nivel);
-                        console.log("Jefe: " + row.jefe)
-                        console.log("JefeFIX: " + jefe)
-                        console.log("Nombres: " + row.nombres);
-                        console.log("Id: " + row.id);
                         chartData.addRows([[{
                             v: row.id.toString(),
-                            f: row.nombres + '<div>(<span>' + row.puesto + '</span>)</div><i class="fa fa-user"/>'
+                            f: '<div class="row"><div class="col"><i class="fa fa-user fa-3x"></i></div></div><div class="row"><div class="col" style="font-weight: bold;font-size: 1.5em;">' + row.nombres + '</div></div><div class="row"><div class="col"><div style="font-style:italic">' + row.puesto + '</div></div></div>'
                         }, jefe, row.puesto]]);
                     });
 
                     var chart = new google.visualization.OrgChart($("#empChart")[0]);
-                    chart.draw(chartData, { allowHtml: true });
+                    chart.draw(chartData, { allowHtml: true, allowCollapse: true, size: 'medium', nodeClass: 'node', selectedNodeClass: 'selectedNode'});
+
+                    for (var i = 0; i < chartData.getNumberOfRows(); i++) {
+                        chart.collapse(i, true);
+                    }
                 },
                 failure: function (xhr, status, error) {
                     alert("Failure: " + xhr.responseText);
@@ -97,6 +96,31 @@
             });
         }
     </script>
+    <style>
+        .node {
+            background: #12533b;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .selectedNode {
+            border: 2px solid #363636;
+            background: #9e2244;
+            border-radius: 10px;
+        }
+
+        .google-visualization-orgchart-lineleft {
+            border-left: 2px solid black;
+        }
+
+        .google-visualization-orgchart-lineright {
+            border-right: 2px solid black;
+        }
+
+        .google-visualization-orgchart-linebottom {
+            border-bottom: 2px solid black;
+        }
+    </style>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
