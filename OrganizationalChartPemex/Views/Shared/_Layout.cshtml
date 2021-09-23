@@ -72,11 +72,17 @@
                     chartData.addColumn('string', 'Jefe');
                     chartData.addColumn('string', 'Puesto');
 
+                    var html_col_row_I = '<div class="row"><div class="col">';
+                    var html_col_row_F = '</div></div>';
+                    var html_col_row_15rem = '<div class="row"><div class="col" style="font-weight: bold;font-size: 1.5em;">';
+                    var html_icon_person = '<div class="row"><div class="col"><i class="fa fa-user fa-3x"></i></div></div>';
+
                     $.each(empData, function (index, row) {
                         var jefe = row.jefe.toString() == "0" ? '' : row.jefe.toString();
+                        var antiguedad = 'Antigüedad: ' + row.antig_anios.toString() + ' Años, ' + row.antig_dias.toString() + ' Días';
                         chartData.addRows([[{
                             v: row.id.toString(),
-                            f: '<div class="row"><div class="col"><i class="fa fa-user fa-3x"></i></div></div><div class="row"><div class="col" style="font-weight: bold;font-size: 1.5em;">' + row.nombres + '</div></div><div class="row"><div class="col"><div style="font-style:italic">' + row.puesto + '</div></div></div>'
+                            f: html_icon_person + html_col_row_15rem + row.desc_dpto + html_col_row_F + html_col_row_I + 'Nombre: ' + row.nombres + html_col_row_F + html_col_row_I + '<div style="font-style:italic">Puesto: ' + row.puesto + '</div>' + html_col_row_F + html_col_row_I + 'Nivel: ' + row.nivel.toString() + html_col_row_F + html_col_row_I + '<div style="font-size: 1em;">Ficha: ' + row.id + '</div>' + html_col_row_F + html_col_row_I + '<div style="font-size: 1em;">' + antiguedad + '</div>' + html_col_row_F + html_col_row_I + '<div style="font-size: 1em;">Región: ' + row.region + '</div>' + html_col_row_F
                         }, jefe, row.puesto]]);
                     });
 
@@ -101,6 +107,8 @@
             background: #12533b;
             border-radius: 10px;
             color: white;
+            min-width: 250px;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.5) !important;
         }
 
         .selectedNode {

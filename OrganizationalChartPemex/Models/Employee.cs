@@ -18,5 +18,6 @@ namespace OrganizationalChartPemex.Models
         public string bukrs { get; set; }
         public string direccion { get; set; }
         public string subdireccion { get; set; }
+        public string desc_dpto { get; set; }
     }
 }

@@ -35,8 +35,8 @@ namespace OrganizationalChartPemex.Controllers
         {
             
             List<Employee> empChartList = new List<Employee>();
-            
-            string query = "SELECT FICHA, NOMBRES, MC_STEXT, nivel_plaza, ANTIG_ANIOS, ANTIG_DIAS, REGIONAL, BUKRS, direccion_coduni, subdireccion_coduni";
+
+            string query = "SELECT FICHA, NOMBRES, MC_STEXT, nivel_plaza, ANTIG_ANIOS, ANTIG_DIAS, REGIONAL, BUKRS, direccion_coduni, subdireccion_coduni, DESC_DEPTO";
             query += " FROM[00_tablero_dg]";
             query += " WHERE NIVEL_PLAZA >= 44";
             query += " ORDER BY BUKRS, NIVEL_PLAZA DESC";
@@ -68,9 +68,11 @@ namespace OrganizationalChartPemex.Controllers
                                      nivel = int.Parse(dr.GetString(3)),
                                      antig_anios = dr.IsDBNull(4)?0:int.Parse(dr.GetString(4)),
                                      antig_dias = dr.IsDBNull(5)?0:int.Parse(dr.GetString(5)),
+                                     region = dr.GetString(6),
                                      bukrs = dr.GetString(7),
                                      direccion = dr.GetString(8),
-                                     subdireccion = dr.GetString(9)
+                                     subdireccion = dr.GetString(9),
+                                     desc_dpto = dr.GetString(10)
                                  }) ;
                             }
                         }
@@ -89,7 +91,8 @@ namespace OrganizationalChartPemex.Controllers
                 empChartList.Add(new Employee()
                 {
                     id = 000001, nombres = "VACANTE", puesto = "DIRECTOR DE PEMEX TRANSFORMACIÓN INDUSTRIAL", nivel = 46, antig_anios = 0, antig_dias = 0, bukrs = "PTRI", subdireccion = "DIRECCIÓN GENERAL DE PEMEX TRANSFORMACIÓN INDUSTRIAL",
-                    direccion = "DIRECCIÓN GENERAL DE PEMEX TRANSFORMACIÓN INDUSTRIAL"
+                    direccion = "DIRECCIÓN GENERAL DE PEMEX TRANSFORMACIÓN INDUSTRIAL",
+                    desc_dpto = "DIRECTOR DE PEMEX TRANSFORMACIÓN INDUSTRIAL", region = "OF CENT"
                 });
                 empChartList.Add(new Employee()
                 {
@@ -99,9 +102,53 @@ namespace OrganizationalChartPemex.Controllers
                     nivel = 45,
                     antig_anios = 0,
                     antig_dias = 0,
+                    region = "OF CENT",
                     bukrs = "PTRI",
                     direccion = "DIRECCIÓN GENERAL DE PEMEX TRANSFORMACIÓN INDUSTRIAL",
-                    subdireccion = "SUBDIRECCIÓN DE SEGURIDAD, SALUD EN EL TRABAJO Y PROTECCIÓN AMBIENTAL"
+                    subdireccion = "SUBDIRECCIÓN DE SEGURIDAD, SALUD EN EL TRABAJO Y PROTECCIÓN AMBIENTAL",
+                    desc_dpto = "SUBDIRECTOR DE SSTPA"
+                });
+                empChartList.Add(new Employee()
+                {
+                    id = 000003,
+                    nombres = "VACANTE",
+                    puesto = "SUBDIRECTOR DE PROGRAMACIÓN Y COORDINACIÓN OPERATIVA",
+                    nivel = 45,
+                    antig_anios = 0,
+                    antig_dias = 0,
+                    region = "OF CENT",
+                    bukrs = "PMXC",
+                    direccion = "DIRECCIÓN CORPORATIVA DE PLANEACIÓN, COORDINACIÓN Y DESEMPEÑO",
+                    subdireccion = "SUBDIRECCIÓN DE PROGRAMACIÓN Y COORDINACIÓN OPERATIVA",
+                    desc_dpto = "SUBDIRECTOR DE PROGRAMACIÓN Y COORDINACIÓN OPERATIVA"
+                });
+                empChartList.Add(new Employee()
+                {
+                    id = 000004,
+                    nombres = "VACANTE",
+                    puesto = "SUBDIRECTOR DE COORDINACIÓN FINANCIERA",
+                    nivel = 45,
+                    antig_anios = 0,
+                    antig_dias = 0,
+                    region = "OF CENT",
+                    bukrs = "PMXC",
+                    direccion = "DIRECCIÓN CORPORATIVA DE FINANZAS",
+                    subdireccion = "SUBDIRECCIÓN DE COORDINACIÓN FINANCIERA",
+                    desc_dpto = "SUBDIRECTOR DE COORDINACIÓN FINANCIERA"
+                });
+                empChartList.Add(new Employee()
+                {
+                    id = 000005,
+                    nombres = "VACANTE",
+                    puesto = "SUBDIRECTOR DE PROCESO DE GAS Y PETROQUÍMICOS",
+                    nivel = 45,
+                    antig_anios = 0,
+                    antig_dias = 0,
+                    region = "OF CENT",
+                    bukrs = "PTRI",
+                    direccion = "DIRECCIÓN GENERAL DE PEMEX TRANSFORMACIÓN INDUSTRIAL",
+                    subdireccion = "SUBDIRECCIÓN DE PROCESO DE GAS Y PETROQUÍMICOS",
+                    desc_dpto = "SUBDIRECTOR DE PROCESO DE GAS Y PETROQUÍMICOS"
                 });
                 foreach (Employee emp in empChartList){
                     if(emp.nivel != 48)
